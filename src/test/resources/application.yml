@@ -1,0 +1,21 @@
+dir:
+  env: HOMEPATH
+  input: data/in
+  output: data/out
+
+input:
+  extension: .dat
+output:
+  extension: .done.dat
+
+file:
+  extension:
+    input: .dat
+    output: .done.dat
+  line:
+    format:
+      seller: "001"
+      client: "002"
+      sale: "003"
+    parser:
+      delimiter: ç
