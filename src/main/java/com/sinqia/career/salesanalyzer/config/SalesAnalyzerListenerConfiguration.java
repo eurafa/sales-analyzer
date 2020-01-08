@@ -11,7 +11,7 @@ public class SalesAnalyzerListenerConfiguration {
 
     @Bean
     @Primary
-    public SalesAnalyzerListener listenerConfig(final SalesAnalyzerDirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
+    public SalesAnalyzerListener listenerConfig(final DirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
         return new SalesAnalyzerListener(directoryConfiguration, fileExtensionConfiguration, reportGenerator);
     }
 

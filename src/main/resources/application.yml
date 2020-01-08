@@ -3,19 +3,24 @@ dir:
   input: data/in
   output: data/out
 
-input:
-  extension: .dat
-output:
-  extension: .done.dat
-
 file:
-  extension:
-    input: .dat
-    output: .done.dat
-  line:
-    format:
-      seller: "001"
-      client: "002"
-      sale: "003"
-    parser:
-      delimiter: ç
+  input:
+    extension: .dat
+    layout:
+      format:
+        seller: "001"
+        client: "002"
+        sale: "003"
+    delimiter:
+      data: "ç"
+      items: ","
+      itemData: "-"
+  output:
+    extension: .done.dat
+    report:
+      simple:
+        info:
+          clientCount: "Quantidade de clientes: %d"
+          sellerCount: "Quantidade de vendedores: %d"
+          bestSaleId: "ID da venda mais cara: %s"
+          worstSeller: "O pior vendedor: %s"

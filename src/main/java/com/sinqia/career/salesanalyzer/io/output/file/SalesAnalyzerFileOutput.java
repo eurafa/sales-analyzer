@@ -1,14 +1,14 @@
-package com.sinqia.career.salesanalyzer.output.file;
+package com.sinqia.career.salesanalyzer.io.output.file;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerDirectoryConfiguration;
+import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
+import com.sinqia.career.salesanalyzer.config.FileOutputReportInfoConfiguration;
 import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
 import com.sinqia.career.salesanalyzer.dto.ReportDataDTO;
-import com.sinqia.career.salesanalyzer.output.SalesAnalyzerOutput;
+import com.sinqia.career.salesanalyzer.io.output.SalesAnalyzerOutput;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -21,13 +21,18 @@ public class SalesAnalyzerFileOutput implements SalesAnalyzerOutput {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final SalesAnalyzerDirectoryConfiguration directoryConfiguration;
+    private final DirectoryConfiguration directoryConfiguration;
+
+    private final FileOutputReportInfoConfiguration fileOutputReportInfoConfiguration;
 
     private final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration;
 
-    public SalesAnalyzerFileOutput(final SalesAnalyzerDirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration) {
+    public SalesAnalyzerFileOutput(final DirectoryConfiguration directoryConfiguration,
+                                   final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration,
+                                   final FileOutputReportInfoConfiguration fileOutputReportInfoConfiguration) {
         this.directoryConfiguration = directoryConfiguration;
         this.fileExtensionConfiguration = fileExtensionConfiguration;
+        this.fileOutputReportInfoConfiguration = fileOutputReportInfoConfiguration;
     }
 
     @Override
@@ -40,17 +45,15 @@ public class SalesAnalyzerFileOutput implements SalesAnalyzerOutput {
         final Path outputFile = outputDir.resolve(outputFileName);
 
         final List<String> content = Arrays.asList(
-                "Quantidade de clientes: " + reportData.getClientCount(),
-                "Quantidade de vendedores: " + reportData.getSellerCount(),
-                "ID da venda mais cara: " + reportData.getBestSaleId(),
-                "O pior vendedor: " + reportData.getWorstSeller());
+                String.format(fileOutputReportInfoConfiguration.getReportClientCountInfo(), reportData.getClientCount()),
+                String.format(fileOutputReportInfoConfiguration.getReportSellerCountInfo(), reportData.getSellerCount()),
+                String.format(fileOutputReportInfoConfiguration.getReportBestSaleIdInfo(), reportData.getBestSaleId()),
+                String.format(fileOutputReportInfoConfiguration.getReportWorstSellerInfo(), reportData.getWorstSeller()));
 
         try (final FileOutputStream fileOutputStream = new FileOutputStream(outputFile.toFile())) {
             IOUtils.writeLines(content, null, fileOutputStream, StandardCharsets.ISO_8859_1);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            logger.error("Error writing report file {}", outputFile, ex);
         }
 
     }

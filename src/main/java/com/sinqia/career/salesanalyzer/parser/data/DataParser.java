@@ -1,4 +1,4 @@
-package com.sinqia.career.salesanalyzer.parser;
+package com.sinqia.career.salesanalyzer.parser.data;
 
 import java.util.List;
 

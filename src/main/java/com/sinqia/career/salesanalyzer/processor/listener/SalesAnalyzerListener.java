@@ -1,6 +1,6 @@
 package com.sinqia.career.salesanalyzer.processor.listener;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerDirectoryConfiguration;
+import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
 import com.sinqia.career.salesanalyzer.report.SalesAnalyzerReportGenerator;
 import org.slf4j.Logger;
@@ -15,13 +15,13 @@ public class SalesAnalyzerListener {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final SalesAnalyzerDirectoryConfiguration directoryConfiguration;
+    private final DirectoryConfiguration directoryConfiguration;
 
     private final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration;
 
     private final SalesAnalyzerReportGenerator reportGenerator;
 
-    public SalesAnalyzerListener(final SalesAnalyzerDirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
+    public SalesAnalyzerListener(final DirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
         this.directoryConfiguration = directoryConfiguration;
         this.fileExtensionConfiguration = fileExtensionConfiguration;
         this.reportGenerator = reportGenerator;

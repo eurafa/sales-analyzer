@@ -1,7 +1,7 @@
 package com.sinqia.career.salesanalyzer.config;
 
-import com.sinqia.career.salesanalyzer.output.SalesAnalyzerOutput;
-import com.sinqia.career.salesanalyzer.output.file.SalesAnalyzerFileOutput;
+import com.sinqia.career.salesanalyzer.io.output.SalesAnalyzerOutput;
+import com.sinqia.career.salesanalyzer.io.output.file.SalesAnalyzerFileOutput;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class SalesAnalyzerOutputConfiguration {
 
     @Bean
-    public SalesAnalyzerOutput outputConfig(final SalesAnalyzerDirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration) {
-        return new SalesAnalyzerFileOutput(directoryConfiguration, fileExtensionConfiguration);
+    public SalesAnalyzerOutput outputConfig(final DirectoryConfiguration directoryConfiguration,
+                                            final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration,
+                                            final FileOutputReportInfoConfiguration fileOutputReportInfoConfiguration) {
+        return new SalesAnalyzerFileOutput(directoryConfiguration, fileExtensionConfiguration, fileOutputReportInfoConfiguration);
     }
 
 }

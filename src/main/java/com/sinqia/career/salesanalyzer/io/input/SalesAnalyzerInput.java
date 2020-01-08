@@ -1,4 +1,4 @@
-package com.sinqia.career.salesanalyzer.input;
+package com.sinqia.career.salesanalyzer.io.input;
 
 import java.util.List;
 

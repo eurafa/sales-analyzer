@@ -10,8 +10,8 @@ public class SalesAnalyzerFileExtensionConfiguration {
 
     private final String outputExtension;
 
-    public SalesAnalyzerFileExtensionConfiguration(@Value("${input.extension}") final String inputExtension,
-                                                   @Value("${output.extension}") final String outputExtension) {
+    public SalesAnalyzerFileExtensionConfiguration(@Value("${file.input.extension:.dat}") final String inputExtension,
+                                                   @Value("${file.output.extension:.done.dat}") final String outputExtension) {
         this.inputExtension = inputExtension;
         this.outputExtension = outputExtension;
     }

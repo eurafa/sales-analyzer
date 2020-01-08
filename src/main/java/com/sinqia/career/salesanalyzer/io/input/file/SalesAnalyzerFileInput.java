@@ -1,7 +1,7 @@
-package com.sinqia.career.salesanalyzer.input.file;
+package com.sinqia.career.salesanalyzer.io.input.file;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerDirectoryConfiguration;
-import com.sinqia.career.salesanalyzer.input.SalesAnalyzerInput;
+import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
+import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +18,9 @@ public class SalesAnalyzerFileInput implements SalesAnalyzerInput {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final SalesAnalyzerDirectoryConfiguration directoryConfiguration;
+    private final DirectoryConfiguration directoryConfiguration;
 
-    public SalesAnalyzerFileInput(final SalesAnalyzerDirectoryConfiguration directoryConfiguration) {
+    public SalesAnalyzerFileInput(final DirectoryConfiguration directoryConfiguration) {
         this.directoryConfiguration = directoryConfiguration;
     }
 

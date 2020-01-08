@@ -1,9 +1,9 @@
 package com.sinqia.career.salesanalyzer.processor.discovery;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerDirectoryConfiguration;
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
-import com.sinqia.career.salesanalyzer.exception.config.SalesAnalyzerFileExtensionConfigurationException;
+import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.exception.io.SalesAnalyzerIOException;
+import com.sinqia.career.salesanalyzer.io.FileExtensionResolver;
+import com.sinqia.career.salesanalyzer.io.FileExtensionValidator;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,33 +15,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class SalesAnalyzerProcessorFileDiscovery {
+public class FileDiscovery {
 
-    private final SalesAnalyzerDirectoryConfiguration pathConfiguration;
+    private final DirectoryConfiguration pathConfiguration;
 
-    private final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration;
+    private final FileExtensionResolver fileExtensionResolver;
 
-    public SalesAnalyzerProcessorFileDiscovery(final SalesAnalyzerDirectoryConfiguration pathConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration) {
+    private final FileExtensionValidator fileExtensionValidator;
+
+    public FileDiscovery(final DirectoryConfiguration pathConfiguration, final FileExtensionResolver fileExtensionResolver, final FileExtensionValidator fileExtensionValidator) {
         this.pathConfiguration = pathConfiguration;
-        this.fileExtensionConfiguration = fileExtensionConfiguration;
+        this.fileExtensionResolver = fileExtensionResolver;
+        this.fileExtensionValidator = fileExtensionValidator;
     }
 
-    public List<String> discoverRemainingFiles() throws SalesAnalyzerIOException {
+    public List<String> discoverFiles() throws SalesAnalyzerIOException {
         final List<String> allInputFiles = getAllInputFiles();
         final List<String> allOutputFiles = getAllOutputFiles();
         final List<String> allOutputOriginalFiles = allOutputFiles.stream()
-                .map(this::originalFilename)
+                .map(fileExtensionResolver::asInput)
                 .collect(Collectors.toList());
         return allInputFiles.stream()
                 .filter(filename -> !allOutputOriginalFiles.contains(filename))
                 .collect(Collectors.toList());
-    }
-
-    String originalFilename(final String outputFilename) {
-        if (fileExtensionConfiguration.getOutputExtension().length() < fileExtensionConfiguration.getInputExtension().length()) {
-            throw new SalesAnalyzerFileExtensionConfigurationException();
-        }
-        return outputFilename.substring(0, outputFilename.length() - fileExtensionConfiguration.getOutputExtension().length()) + fileExtensionConfiguration.getInputExtension();
     }
 
     private List<String> getAllInputFiles() throws SalesAnalyzerIOException {
@@ -49,7 +45,7 @@ public class SalesAnalyzerProcessorFileDiscovery {
             return walk
                     .filter(Files::isRegularFile)
                     .map(path -> path.toFile().getName())
-                    .filter(file -> file.endsWith(fileExtensionConfiguration.getInputExtension()))
+                    .filter(fileExtensionValidator::isInput)
                     .collect(Collectors.toList());
         } catch (final IOException ex) {
             throw new SalesAnalyzerIOException(ex);
@@ -65,7 +61,7 @@ public class SalesAnalyzerProcessorFileDiscovery {
             return walk
                     .filter(Files::isRegularFile)
                     .map(path -> path.toFile().getName())
-                    .filter(file -> file.endsWith(fileExtensionConfiguration.getOutputExtension()))
+                    .filter(fileExtensionValidator::isOutput)
                     .collect(Collectors.toList());
         } catch (final IOException ex) {
             throw new SalesAnalyzerIOException(ex);

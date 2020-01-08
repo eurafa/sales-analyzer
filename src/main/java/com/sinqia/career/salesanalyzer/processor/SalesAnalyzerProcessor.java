@@ -1,8 +1,8 @@
 package com.sinqia.career.salesanalyzer.processor;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerDirectoryConfiguration;
+import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.exception.io.SalesAnalyzerIOException;
-import com.sinqia.career.salesanalyzer.processor.discovery.SalesAnalyzerProcessorFileDiscovery;
+import com.sinqia.career.salesanalyzer.processor.discovery.FileDiscovery;
 import com.sinqia.career.salesanalyzer.processor.listener.SalesAnalyzerListener;
 import com.sinqia.career.salesanalyzer.report.SalesAnalyzerReportGenerator;
 import org.slf4j.Logger;
@@ -18,15 +18,15 @@ public class SalesAnalyzerProcessor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final SalesAnalyzerDirectoryConfiguration pathConfiguration;
+    private final DirectoryConfiguration pathConfiguration;
 
-    private final SalesAnalyzerProcessorFileDiscovery fileDiscovery;
+    private final FileDiscovery fileDiscovery;
 
     private final SalesAnalyzerReportGenerator reportGenerator;
 
     private final SalesAnalyzerListener listener;
 
-    public SalesAnalyzerProcessor(final SalesAnalyzerDirectoryConfiguration pathConfiguration, final SalesAnalyzerProcessorFileDiscovery fileDiscovery, final SalesAnalyzerReportGenerator reportGenerator, final SalesAnalyzerListener listener) {
+    public SalesAnalyzerProcessor(final DirectoryConfiguration pathConfiguration, final FileDiscovery fileDiscovery, final SalesAnalyzerReportGenerator reportGenerator, final SalesAnalyzerListener listener) {
         this.pathConfiguration = pathConfiguration;
         this.fileDiscovery = fileDiscovery;
         this.reportGenerator = reportGenerator;
@@ -37,10 +37,10 @@ public class SalesAnalyzerProcessor {
     public void process() {
         logger.info("Processing files from %{}%/{}", pathConfiguration.getEnvVar(), pathConfiguration.getInputDir());
         try {
-            final List<String> remainingFiles = fileDiscovery.discoverRemainingFiles();
-            logger.info("{} new files found", remainingFiles.size());
+            final List<String> filesToAnalyze = fileDiscovery.discoverFiles();
+            logger.info("{} new files found", filesToAnalyze.size());
 
-            remainingFiles.forEach(reportGenerator::generate);
+            filesToAnalyze.forEach(reportGenerator::generate);
             logger.info("Reports processed successfully!");
 
             Optional.ofNullable(listener).ifPresent(SalesAnalyzerListener::listen);
