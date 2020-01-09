@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class SalesDataAnalyzer {
+public class SalesDataAnalyzerBusiness {
 
     public AnalyzeResultDTO analyzeResult(final SalesDataDTO salesData) {
         final int clientCount = salesData.getClients().size();

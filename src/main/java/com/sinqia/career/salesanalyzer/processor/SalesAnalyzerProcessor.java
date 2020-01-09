@@ -1,13 +1,12 @@
 package com.sinqia.career.salesanalyzer.processor;
 
-import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzer;
+import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzerBusiness;
 import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.exception.io.FileException;
 import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
 import com.sinqia.career.salesanalyzer.io.output.SalesAnalyzerOutput;
 import com.sinqia.career.salesanalyzer.parser.SalesAnalyzerParser;
 import com.sinqia.career.salesanalyzer.processor.discovery.FileDiscovery;
-import com.sinqia.career.salesanalyzer.processor.listener.SalesAnalyzerMonitor;
 import com.sinqia.career.salesanalyzer.report.SalesAnalyzeReport;
 import com.sinqia.career.salesanalyzer.report.generator.SalesAnalyzerReportGenerator;
 import org.slf4j.Logger;
@@ -33,7 +32,7 @@ public class SalesAnalyzerProcessor {
 
     private final SalesAnalyzerParser parser;
 
-    private final SalesDataAnalyzer analyzer;
+    private final SalesDataAnalyzerBusiness analyzer;
 
     private final SalesAnalyzeReport report;
 
@@ -48,7 +47,7 @@ public class SalesAnalyzerProcessor {
                                   final SalesAnalyzerFileProcessor processor,
                                   final SalesAnalyzerInput input,
                                   final SalesAnalyzerParser parser,
-                                  final SalesDataAnalyzer analyzer,
+                                  final SalesDataAnalyzerBusiness analyzer,
                                   final SalesAnalyzeReport report,
                                   final SalesAnalyzerOutput output,
                                   final SalesAnalyzerReportGenerator reportGenerator,

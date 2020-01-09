@@ -3,7 +3,6 @@ package com.sinqia.career.salesanalyzer.processor;
 import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.config.FileExtensionConfiguration;
 import com.sinqia.career.salesanalyzer.exception.processor.ListenerException;
-import com.sinqia.career.salesanalyzer.processor.SalesAnalyzerFileProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

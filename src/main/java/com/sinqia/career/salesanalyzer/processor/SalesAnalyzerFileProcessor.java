@@ -1,6 +1,6 @@
 package com.sinqia.career.salesanalyzer.processor;
 
-import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzer;
+import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzerBusiness;
 import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.dto.SalesDataDTO;
 import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
@@ -28,7 +28,7 @@ public class SalesAnalyzerFileProcessor {
 
     private final SalesAnalyzerParser parser;
 
-    private final SalesDataAnalyzer analyzer;
+    private final SalesDataAnalyzerBusiness analyzer;
 
     private final SalesAnalyzeReport report;
 
@@ -38,7 +38,7 @@ public class SalesAnalyzerFileProcessor {
                                       final FileDiscovery fileDiscovery,
                                       final SalesAnalyzerInput input,
                                       final SalesAnalyzerParser parser,
-                                      final SalesDataAnalyzer analyzer,
+                                      final SalesDataAnalyzerBusiness analyzer,
                                       final SalesAnalyzeReport report,
                                       final SalesAnalyzerOutput output) {
         this.directoryConfiguration = directoryConfiguration;

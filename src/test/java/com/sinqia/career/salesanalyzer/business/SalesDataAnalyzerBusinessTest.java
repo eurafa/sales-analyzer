@@ -13,12 +13,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-class SalesDataAnalyzerTest {
+class SalesDataAnalyzerBusinessTest {
 
-    private final SalesDataAnalyzer analyzer;
+    private final SalesDataAnalyzerBusiness analyzer;
 
-    SalesDataAnalyzerTest() {
-        analyzer = new SalesDataAnalyzer();
+    SalesDataAnalyzerBusinessTest() {
+        analyzer = new SalesDataAnalyzerBusiness();
     }
 
     @Test
