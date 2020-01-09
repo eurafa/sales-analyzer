@@ -1,7 +1,7 @@
 package com.sinqia.career.salesanalyzer.processor.discovery;
 
 import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
-import com.sinqia.career.salesanalyzer.exception.io.SalesAnalyzerIOException;
+import com.sinqia.career.salesanalyzer.exception.io.FileException;
 import com.sinqia.career.salesanalyzer.io.FileExtensionResolver;
 import com.sinqia.career.salesanalyzer.io.FileExtensionValidator;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,7 @@ public class FileDiscovery {
         this.fileExtensionValidator = fileExtensionValidator;
     }
 
-    public List<String> discoverFiles() throws SalesAnalyzerIOException {
+    public List<String> discoverFiles() throws FileException {
         final List<String> allInputFiles = getAllInputFiles();
         final List<String> allOutputFiles = getAllOutputFiles();
         final List<String> allOutputOriginalFiles = allOutputFiles.stream()
@@ -40,7 +40,7 @@ public class FileDiscovery {
                 .collect(Collectors.toList());
     }
 
-    private List<String> getAllInputFiles() throws SalesAnalyzerIOException {
+    private List<String> getAllInputFiles() throws FileException {
         try (final Stream<Path> walk = filesWalk(pathConfiguration.getInputDir())) {
             return walk
                     .filter(Files::isRegularFile)
@@ -48,7 +48,7 @@ public class FileDiscovery {
                     .filter(fileExtensionValidator::isInput)
                     .collect(Collectors.toList());
         } catch (final IOException ex) {
-            throw new SalesAnalyzerIOException(ex);
+            throw new FileException(ex);
         }
     }
 
@@ -56,7 +56,7 @@ public class FileDiscovery {
         return Files.walk(Paths.get(System.getenv(pathConfiguration.getEnvVar()) + "/" + innerDirectory));
     }
 
-    private List<String> getAllOutputFiles() throws SalesAnalyzerIOException {
+    private List<String> getAllOutputFiles() throws FileException {
         try (final Stream<Path> walk = filesWalk(pathConfiguration.getOutputDir())) {
             return walk
                     .filter(Files::isRegularFile)
@@ -64,7 +64,7 @@ public class FileDiscovery {
                     .filter(fileExtensionValidator::isOutput)
                     .collect(Collectors.toList());
         } catch (final IOException ex) {
-            throw new SalesAnalyzerIOException(ex);
+            throw new FileException(ex);
         }
     }
 

@@ -31,3 +31,13 @@ Após o processamento das análises, um listener é ativado monitorando o diret�
 * Logback
 * JUnit
 * AssertJ
+
+### Como usar
+
+Para
+
+Obs.: Certifique-se da variável de ambiente `%HOMEPATH%` que indica o diretório base, bem como os diretórios internos de entrada e saída.
+
+### Próximos passos
+
+De fato, a aplicação já pode ser usada, porém sempre existem pontos de evolução.
