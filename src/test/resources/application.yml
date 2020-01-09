@@ -2,7 +2,7 @@ dir:
   env: HOMEPATH
   input: data/in
   output: data/out
-  monitor: true
+  monitor: false
 
 file:
   input:

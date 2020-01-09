@@ -1,12 +1,10 @@
 package com.sinqia.career.salesanalyzer.processor;
 
 import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzerBusiness;
-import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
 import com.sinqia.career.salesanalyzer.dto.SalesDataDTO;
 import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
 import com.sinqia.career.salesanalyzer.io.output.SalesAnalyzerOutput;
 import com.sinqia.career.salesanalyzer.parser.SalesAnalyzerParser;
-import com.sinqia.career.salesanalyzer.processor.discovery.FileDiscovery;
 import com.sinqia.career.salesanalyzer.report.SalesAnalyzeReport;
 import com.sinqia.career.salesanalyzer.report.dto.AnalyzeResultDTO;
 import org.slf4j.Logger;
@@ -20,10 +18,6 @@ public class SalesAnalyzerFileProcessor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final DirectoryConfiguration directoryConfiguration;
-
-    private final FileDiscovery fileDiscovery;
-
     private final SalesAnalyzerInput input;
 
     private final SalesAnalyzerParser parser;
@@ -34,15 +28,11 @@ public class SalesAnalyzerFileProcessor {
 
     private final SalesAnalyzerOutput output;
 
-    public SalesAnalyzerFileProcessor(final DirectoryConfiguration directoryConfiguration,
-                                      final FileDiscovery fileDiscovery,
-                                      final SalesAnalyzerInput input,
+    public SalesAnalyzerFileProcessor(final SalesAnalyzerInput input,
                                       final SalesAnalyzerParser parser,
                                       final SalesDataAnalyzerBusiness analyzer,
                                       final SalesAnalyzeReport report,
                                       final SalesAnalyzerOutput output) {
-        this.directoryConfiguration = directoryConfiguration;
-        this.fileDiscovery = fileDiscovery;
         this.input = input;
         this.parser = parser;
         this.analyzer = analyzer;

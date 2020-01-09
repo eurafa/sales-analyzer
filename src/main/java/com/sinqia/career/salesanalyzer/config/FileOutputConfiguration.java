@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SalesAnalyzerOutputConfiguration {
+public class FileOutputConfiguration {
 
     @Bean
     public SalesAnalyzerOutput outputConfig(final DirectoryConfiguration directoryConfiguration,

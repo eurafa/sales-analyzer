@@ -1,7 +1,5 @@
 package com.sinqia.career.salesanalyzer.config;
 
-import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
-import com.sinqia.career.salesanalyzer.io.input.file.SalesAnalyzerFileInput;
 import com.sinqia.career.salesanalyzer.parser.DefaultSalesAnalyzerParser;
 import com.sinqia.career.salesanalyzer.parser.SalesAnalyzerParser;
 import com.sinqia.career.salesanalyzer.parser.data.ClientDataParser;
@@ -11,12 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SalesAnalyzerInputConfiguration {
-
-    @Bean
-    public SalesAnalyzerInput inputConfig(final DirectoryConfiguration directoryConfiguration) {
-        return new SalesAnalyzerFileInput(directoryConfiguration);
-    }
+public class FileInputParserConfiguration {
 
     @Bean
     public SalesAnalyzerParser parserConfig(final FileInputLayoutFormatConfiguration layoutFormatConfiguration,

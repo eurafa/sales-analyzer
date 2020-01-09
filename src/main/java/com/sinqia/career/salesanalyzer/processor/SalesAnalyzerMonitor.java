@@ -19,14 +19,14 @@ public class SalesAnalyzerMonitor {
 
     private final FileExtensionConfiguration fileExtensionConfiguration;
 
-    private final SalesAnalyzerFileProcessor processor;
+    private final SalesAnalyzerFileProcessor fileProcessor;
 
     public SalesAnalyzerMonitor(final DirectoryConfiguration directoryConfiguration,
                                 final FileExtensionConfiguration fileExtensionConfiguration,
-                                final SalesAnalyzerFileProcessor processor) {
+                                final SalesAnalyzerFileProcessor fileProcessor) {
         this.directoryConfiguration = directoryConfiguration;
         this.fileExtensionConfiguration = fileExtensionConfiguration;
-        this.processor = processor;
+        this.fileProcessor = fileProcessor;
     }
 
     public void activate() {
@@ -41,7 +41,7 @@ public class SalesAnalyzerMonitor {
                     final String filename = event.context().toString();
                     if (filename.endsWith(fileExtensionConfiguration.getInputExtension())) {
                         logger.info("Received a new file: {}", filename);
-                        processor.processFile(filename);
+                        fileProcessor.processFile(filename);
                     }
                 }
             } while (key.reset());

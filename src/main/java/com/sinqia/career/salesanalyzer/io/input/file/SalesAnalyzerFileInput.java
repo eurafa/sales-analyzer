@@ -30,7 +30,7 @@ public class SalesAnalyzerFileInput implements SalesAnalyzerInput {
         final String baseDir = System.getenv(directoryConfiguration.getEnvVar());
         final Path inputDir = Paths.get(baseDir + "/" + directoryConfiguration.getInputDir());
 
-        try (FileInputStream fileInputStream = new FileInputStream(inputDir.resolve(filename).toFile())) {
+        try (final FileInputStream fileInputStream = new FileInputStream(inputDir.resolve(filename).toFile())) {
             return IOUtils.readLines(fileInputStream, StandardCharsets.ISO_8859_1);
         } catch (final IOException ex) {
             logger.error("Error reading file {}", filename, ex);

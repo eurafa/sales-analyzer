@@ -6,7 +6,7 @@ Este projeto é responsável pela leitura de dados de vendas e análise dos dado
 
 ## Solicitação
 
-A solicitação indica para ler arquivos, realizar a análise dos dados e gerar relatório, mas é importante ressaltar que não é 100% clara quanto ao volume, a distinção de layout/formato e a distribuição dos mesmos nos arquivos de entrada, e tem alguns pontos contraditórios que deixam dúvidas quanto a saída, se é esperado um relatório único ou um relatório para cada arquivo analisado.
+A solicitação (arquivo Prova_Desenvolvedor.pdf) indica para ler arquivos, realizar a análise dos dados e gerar relatório, mas é importante ressaltar que não é 100% clara quanto ao volume, a distinção de layout/formato e a distribuição dos mesmos nos arquivos de entrada, e tem alguns pontos contraditórios que deixam dúvidas quanto a saída, se é esperado um relatório único ou um relatório para cada arquivo analisado.
 
 Entre outras dúvidas como:
 
@@ -34,10 +34,28 @@ Após o processamento das análises, um listener é ativado monitorando o diret�
 
 ### Como usar
 
-Para
+Para compilar o projeto, rodar os testes e empacotar o arquivo `.jar` execute o comando:
+
+```$bash
+gradlew clean build bootJar
+```
+
+Será gerado o arquivo `sales-analyzer-1.0.0.jar` no diretório `build/libs` do projeto.
+
+Para executar a aplicação, rode o comando:
+
+```$bash
+java -jar build/libs/sales-analyzer-1.0.0.jar
+``` 
 
 Obs.: Certifique-se da variável de ambiente `%HOMEPATH%` que indica o diretório base, bem como os diretórios internos de entrada e saída.
 
 ### Próximos passos
 
 De fato, a aplicação já pode ser usada, porém sempre existem pontos de evolução.
+
+* Extender incluir novas análises e relatórios
+* Aumentar a cobertura de testes
+* Paralelizar a leitura dos arquivos para melhor performance
+* Utilizar ponto de montagem
+* Escalar a aplicação utilizando mecanismos de filas e cache
