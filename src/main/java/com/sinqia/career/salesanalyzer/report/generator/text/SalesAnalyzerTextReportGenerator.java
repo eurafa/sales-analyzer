@@ -1,17 +1,17 @@
-package com.sinqia.career.salesanalyzer.report.text;
+package com.sinqia.career.salesanalyzer.report.generator.text;
 
-import com.sinqia.career.salesanalyzer.business.SalesDataAnalyzer;
-import com.sinqia.career.salesanalyzer.dto.ReportDataDTO;
 import com.sinqia.career.salesanalyzer.dto.SalesDataDTO;
 import com.sinqia.career.salesanalyzer.io.input.SalesAnalyzerInput;
 import com.sinqia.career.salesanalyzer.io.output.SalesAnalyzerOutput;
 import com.sinqia.career.salesanalyzer.parser.SalesAnalyzerParser;
-import com.sinqia.career.salesanalyzer.report.SalesAnalyzerReportGenerator;
+import com.sinqia.career.salesanalyzer.report.SalesAnalyzeReport;
+import com.sinqia.career.salesanalyzer.report.generator.SalesAnalyzerReportGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+@Deprecated
 public class SalesAnalyzerTextReportGenerator implements SalesAnalyzerReportGenerator {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -22,13 +22,16 @@ public class SalesAnalyzerTextReportGenerator implements SalesAnalyzerReportGene
 
     private final SalesAnalyzerOutput output;
 
-    private final SalesDataAnalyzer dataAnalyzer;
+    private final SalesAnalyzeReport report;
 
-    public SalesAnalyzerTextReportGenerator(final SalesAnalyzerInput input, final SalesAnalyzerParser parser, final SalesAnalyzerOutput output, final SalesDataAnalyzer dataAnalyzer) {
+    public SalesAnalyzerTextReportGenerator(final SalesAnalyzerInput input,
+                                            final SalesAnalyzerParser parser,
+                                            final SalesAnalyzerOutput output,
+                                            final SalesAnalyzeReport report) {
         this.input = input;
         this.parser = parser;
         this.output = output;
-        this.dataAnalyzer = dataAnalyzer;
+        this.report = report;
     }
 
     @Override
@@ -40,10 +43,10 @@ public class SalesAnalyzerTextReportGenerator implements SalesAnalyzerReportGene
         final SalesDataDTO salesData = parser.parse(fileData);
 
         logger.info("Analyzing file {}...", filename);
-        final ReportDataDTO reportData = dataAnalyzer.analyze(salesData);
+        //final ResumeReportDataDTO reportData = report.analyze(salesData);
 
         logger.info("Generating report for file {}...", filename);
-        output.write(filename, reportData);
+        //output.write(filename, reportData);
 
         logger.info("Report successfully generated for file {}", filename);
     }

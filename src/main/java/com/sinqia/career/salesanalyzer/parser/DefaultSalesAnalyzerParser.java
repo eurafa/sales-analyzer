@@ -1,5 +1,6 @@
 package com.sinqia.career.salesanalyzer.parser;
 
+import com.sinqia.career.salesanalyzer.config.FileInputDelimiterConfiguration;
 import com.sinqia.career.salesanalyzer.config.FileInputLayoutFormatConfiguration;
 import com.sinqia.career.salesanalyzer.dto.ClientDTO;
 import com.sinqia.career.salesanalyzer.dto.SaleDTO;
@@ -17,6 +18,8 @@ public class DefaultSalesAnalyzerParser implements SalesAnalyzerParser {
 
     private final FileInputLayoutFormatConfiguration layoutFormatConfiguration;
 
+    private final FileInputDelimiterConfiguration delimiterConfiguration;
+
     private final SellerDataParser sellerParser;
 
     private final ClientDataParser clientParser;
@@ -24,10 +27,12 @@ public class DefaultSalesAnalyzerParser implements SalesAnalyzerParser {
     private final SaleDataParser saleParser;
 
     public DefaultSalesAnalyzerParser(final FileInputLayoutFormatConfiguration layoutFormatConfiguration,
+                                      final FileInputDelimiterConfiguration delimiterConfiguration,
                                       final SellerDataParser sellerParser,
                                       final ClientDataParser clientParser,
                                       final SaleDataParser saleParser) {
         this.layoutFormatConfiguration = layoutFormatConfiguration;
+        this.delimiterConfiguration = delimiterConfiguration;
         this.sellerParser = sellerParser;
         this.clientParser = clientParser;
         this.saleParser = saleParser;
@@ -35,11 +40,11 @@ public class DefaultSalesAnalyzerParser implements SalesAnalyzerParser {
 
     @Override
     public SalesDataDTO parse(final List<String> content) {
-        final Map<String, List<String>> linesByFormatId = content.stream().collect(Collectors.groupingBy(s -> s.substring(0, 3)));
+        final Map<String, List<String>> linesByLayoutFormat = content.stream().collect(Collectors.groupingBy(s -> s.substring(0, s.indexOf(delimiterConfiguration.getDataDelimiter()))));
 
-        final List<String> sellers = linesByFormatId.get(layoutFormatConfiguration.getLayoutFormatSeller());
-        final List<String> clients = linesByFormatId.get(layoutFormatConfiguration.getLayoutFormatClient());
-        final List<String> sales = linesByFormatId.get(layoutFormatConfiguration.getLayoutFormatSale());
+        final List<String> sellers = linesByLayoutFormat.get(layoutFormatConfiguration.getLayoutFormatSeller());
+        final List<String> clients = linesByLayoutFormat.get(layoutFormatConfiguration.getLayoutFormatClient());
+        final List<String> sales = linesByLayoutFormat.get(layoutFormatConfiguration.getLayoutFormatSale());
 
         return new SalesDataDTO(parseSellers(sellers), parseClients(clients), parseSales(sales));
     }

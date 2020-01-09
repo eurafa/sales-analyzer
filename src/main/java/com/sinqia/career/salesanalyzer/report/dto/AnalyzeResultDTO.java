@@ -1,6 +1,6 @@
-package com.sinqia.career.salesanalyzer.dto;
+package com.sinqia.career.salesanalyzer.report.dto;
 
-public class ReportDataDTO {
+public class AnalyzeResultDTO {
 
     private final int clientCount;
 
@@ -10,7 +10,7 @@ public class ReportDataDTO {
 
     private final String worstSeller;
 
-    public ReportDataDTO(final int clientCount, final int sellerCount, final String bestSaleId, final String worstSeller) {
+    public AnalyzeResultDTO(final int clientCount, final int sellerCount, final String bestSaleId, final String worstSeller) {
         this.clientCount = clientCount;
         this.sellerCount = sellerCount;
         this.bestSaleId = bestSaleId;

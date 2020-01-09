@@ -1,8 +1,8 @@
 package com.sinqia.career.salesanalyzer.processor.listener;
 
 import com.sinqia.career.salesanalyzer.config.DirectoryConfiguration;
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
-import com.sinqia.career.salesanalyzer.report.SalesAnalyzerReportGenerator;
+import com.sinqia.career.salesanalyzer.config.FileExtensionConfiguration;
+import com.sinqia.career.salesanalyzer.report.generator.SalesAnalyzerReportGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -17,11 +17,11 @@ public class SalesAnalyzerListener {
 
     private final DirectoryConfiguration directoryConfiguration;
 
-    private final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration;
+    private final FileExtensionConfiguration fileExtensionConfiguration;
 
     private final SalesAnalyzerReportGenerator reportGenerator;
 
-    public SalesAnalyzerListener(final DirectoryConfiguration directoryConfiguration, final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
+    public SalesAnalyzerListener(final DirectoryConfiguration directoryConfiguration, final FileExtensionConfiguration fileExtensionConfiguration, final SalesAnalyzerReportGenerator reportGenerator) {
         this.directoryConfiguration = directoryConfiguration;
         this.fileExtensionConfiguration = fileExtensionConfiguration;
         this.reportGenerator = reportGenerator;

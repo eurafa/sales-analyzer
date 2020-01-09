@@ -10,9 +10,8 @@ public class SalesAnalyzerOutputConfiguration {
 
     @Bean
     public SalesAnalyzerOutput outputConfig(final DirectoryConfiguration directoryConfiguration,
-                                            final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration,
-                                            final FileOutputReportInfoConfiguration fileOutputReportInfoConfiguration) {
-        return new SalesAnalyzerFileOutput(directoryConfiguration, fileExtensionConfiguration, fileOutputReportInfoConfiguration);
+                                            final FileExtensionConfiguration fileExtensionConfiguration) {
+        return new SalesAnalyzerFileOutput(directoryConfiguration, fileExtensionConfiguration);
     }
 
 }

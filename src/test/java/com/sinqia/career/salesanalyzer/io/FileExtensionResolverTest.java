@@ -1,6 +1,6 @@
 package com.sinqia.career.salesanalyzer.io;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
+import com.sinqia.career.salesanalyzer.config.FileExtensionConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +14,7 @@ class FileExtensionResolverTest {
     private final FileExtensionResolver fileExtensionResolver;
 
     FileExtensionResolverTest() {
-        final SalesAnalyzerFileExtensionConfiguration config = new SalesAnalyzerFileExtensionConfiguration(INPUT_EXTENSION, OUTPUT_EXTENSION);
+        final FileExtensionConfiguration config = new FileExtensionConfiguration(INPUT_EXTENSION, OUTPUT_EXTENSION);
         fileExtensionResolver = new FileExtensionResolver(config);
     }
 

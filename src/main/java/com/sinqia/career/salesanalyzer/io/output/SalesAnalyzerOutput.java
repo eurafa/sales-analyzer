@@ -1,9 +1,9 @@
 package com.sinqia.career.salesanalyzer.io.output;
 
-import com.sinqia.career.salesanalyzer.dto.ReportDataDTO;
+import java.util.List;
 
 public interface SalesAnalyzerOutput {
 
-    void write(String sourceFileName, ReportDataDTO reportData);
+    void write(String sourceFileName, List<String> reportData);
 
 }

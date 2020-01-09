@@ -19,8 +19,12 @@ public class SalesAnalyzerInputConfiguration {
     }
 
     @Bean
-    public SalesAnalyzerParser parserConfig(final FileInputLayoutFormatConfiguration layoutFormatConfiguration, final SellerDataParser sellerParser, final ClientDataParser clientParser, final SaleDataParser saleParser) {
-        return new DefaultSalesAnalyzerParser(layoutFormatConfiguration, sellerParser, clientParser, saleParser);
+    public SalesAnalyzerParser parserConfig(final FileInputLayoutFormatConfiguration layoutFormatConfiguration,
+                                            final FileInputDelimiterConfiguration delimiterConfiguration,
+                                            final SellerDataParser sellerParser,
+                                            final ClientDataParser clientParser,
+                                            final SaleDataParser saleParser) {
+        return new DefaultSalesAnalyzerParser(layoutFormatConfiguration, delimiterConfiguration, sellerParser, clientParser, saleParser);
     }
 
 }

@@ -24,7 +24,7 @@ class DefaultSalesAnalyzerParserTest {
         final SellerDataParser sellerParser = new SellerDataParser(delimiterConfiguration);
         final ClientDataParser clientDataParser = new ClientDataParser(delimiterConfiguration);
         final SaleDataParser saleDataParser = new SaleDataParser(delimiterConfiguration);
-        parser = new DefaultSalesAnalyzerParser(layoutFormatConfiguration, sellerParser, clientDataParser, saleDataParser);
+        parser = new DefaultSalesAnalyzerParser(layoutFormatConfiguration, delimiterConfiguration, sellerParser, clientDataParser, saleDataParser);
     }
 
     @Test

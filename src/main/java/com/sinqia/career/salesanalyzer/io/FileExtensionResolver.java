@@ -1,14 +1,14 @@
 package com.sinqia.career.salesanalyzer.io;
 
-import com.sinqia.career.salesanalyzer.config.SalesAnalyzerFileExtensionConfiguration;
+import com.sinqia.career.salesanalyzer.config.FileExtensionConfiguration;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FileExtensionResolver {
 
-    private final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration;
+    private final FileExtensionConfiguration fileExtensionConfiguration;
 
-    public FileExtensionResolver(final SalesAnalyzerFileExtensionConfiguration fileExtensionConfiguration) {
+    public FileExtensionResolver(final FileExtensionConfiguration fileExtensionConfiguration) {
         this.fileExtensionConfiguration = fileExtensionConfiguration;
     }
 
